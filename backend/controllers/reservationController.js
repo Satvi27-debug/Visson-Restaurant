@@ -128,4 +128,27 @@ const getAvailability = async (req, res) => {
   }
 };
 
-module.exports = { createReservation, getUserReservations, cancelReservation, getAllReservations, getAvailability };
+const completeReservation = async (req, res) => {
+  try {
+    if (req.user.role !== 'Admin') return res.status(403).json({ message: 'Not authorized' });
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation) return res.status(404).json({ message: 'Reservation not found' });
+    reservation.status = 'Completed';
+    await reservation.save();
+    res.json({ message: 'Reservation marked as completed', reservation });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const clearCompletedReservations = async (req, res) => {
+  try {
+    if (req.user.role !== 'Admin') return res.status(403).json({ message: 'Not authorized' });
+    await Reservation.deleteMany({ status: 'Completed' });
+    res.json({ message: 'All completed reservations deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createReservation, getUserReservations, cancelReservation, getAllReservations, getAvailability, completeReservation, clearCompletedReservations };

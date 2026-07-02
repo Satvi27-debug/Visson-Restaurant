@@ -20,6 +20,7 @@ const Layout = ({ children }) => {
     { name: 'Dashboard', path: '/admin' },
     { name: 'Visitors', path: '/admin/visitors' },
     { name: 'Bookings', path: '/admin/bookings' },
+    { name: 'Completed Orders', path: '/admin/completed' },
     { name: 'Complaints', path: '/admin/complaints' },
   ];
 

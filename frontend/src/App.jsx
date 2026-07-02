@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import AdminDashboard from './pages/admin/Dashboard';
 import Visitors from './pages/admin/Visitors';
 import Bookings from './pages/admin/Bookings';
+import CompletedOrders from './pages/admin/CompletedOrders';
 import AdminComplaints from './pages/admin/Complaints';
 import CustomerDashboard from './pages/customer/Dashboard';
 import MyBookings from './pages/customer/MyBookings';
@@ -35,6 +36,7 @@ function App() {
         <Route path="/admin" element={<PrivateRoute roleRequired="Admin"><AdminDashboard /></PrivateRoute>} />
         <Route path="/admin/visitors" element={<PrivateRoute roleRequired="Admin"><Visitors /></PrivateRoute>} />
         <Route path="/admin/bookings" element={<PrivateRoute roleRequired="Admin"><Bookings /></PrivateRoute>} />
+        <Route path="/admin/completed" element={<PrivateRoute roleRequired="Admin"><CompletedOrders /></PrivateRoute>} />
         <Route path="/admin/complaints" element={<PrivateRoute roleRequired="Admin"><AdminComplaints /></PrivateRoute>} />
 
         {/* Customer Routes */}

@@ -89,7 +89,20 @@ const Bookings = () => {
               <p><strong>Status:</strong> {b.status}</p>
               <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
                 <button className="btn btn-danger" onClick={() => handleCancel(b._id)}>Cancel</button>
-                <button className="btn btn-outline" onClick={() => alert('Update functionality placeholder (requires modal/form)')}>Update</button>
+                <button 
+                  className="btn" 
+                  style={{ backgroundColor: 'var(--color-blue)', color: '#fff' }} 
+                  onClick={async () => {
+                    try {
+                      await api.put(`/reservations/${b._id}/complete`);
+                      fetchData();
+                    } catch (err) {
+                      console.error(err);
+                    }
+                  }}
+                >
+                  Complete
+                </button>
               </div>
             </Card>
           ))}
