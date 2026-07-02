@@ -93,6 +93,16 @@ Visson-Restaurant/
 
 ## 🌍 Deployment
 
-- **Frontend (Vercel)**: Connect your GitHub repo to Vercel. Set the Root Directory to `frontend`. Add `VITE_API_URL` to your environment variables pointing to your deployed backend.
-- **Backend (Render)**: Connect your GitHub repo to Render. Set the Root Directory to `backend`. Set the Build Command to `npm install` and the Start Command to `node server.js`. Add `MONGO_URI` and `JWT_SECRET` to environment variables.
-- **Database (MongoDB Atlas)**: Ensure Network Access is configured to allow Render IP addresses (or `0.0.0.0/0`).
+- **Backend (Vercel)**: 
+  1. In Vercel, click **Add New Project** and import your GitHub repository.
+  2. Set the **Root Directory** to `backend`.
+  3. Ensure the Framework Preset is "Other".
+  4. Under Environment Variables, add `MONGO_URI` and `JWT_SECRET`.
+  5. Click **Deploy**. Vercel will automatically convert `server.js` into a serverless API based on the included `vercel.json` file.
+  
+- **Frontend (Vercel)**: 
+  1. In Vercel, click **Add New Project** and import the exact same GitHub repository again.
+  2. Set the **Root Directory** to `frontend`.
+  3. The Framework Preset should auto-detect "Vite".
+  4. Under Environment Variables, add `VITE_API_URL` and point it to your deployed Backend URL (e.g., `https://your-backend-app.vercel.app/api`).
+  5. Click **Deploy**.
