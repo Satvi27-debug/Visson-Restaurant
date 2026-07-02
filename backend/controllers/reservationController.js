@@ -18,10 +18,9 @@ const createReservation = async (req, res) => {
     // Find all tables with the required capacity
     const availableTables = await Table.find({ capacity: requiredCapacity });
     
-    // Find conflicting reservations on the same date and time slot
+    // Find conflicting reservations on the same date (Entire Day reservation)
     const conflictingReservations = await Reservation.find({
       date,
-      timeSlot,
       status: 'Booked'
     });
 
@@ -38,7 +37,6 @@ const createReservation = async (req, res) => {
     const existingUserReservation = await Reservation.findOne({
       user: req.user._id,
       date,
-      timeSlot,
       status: 'Booked'
     });
 
@@ -106,7 +104,7 @@ const getAvailability = async (req, res) => {
     }
 
     const tables = await Table.find();
-    const booked = await Reservation.find({ date, timeSlot, status: 'Booked' });
+    const booked = await Reservation.find({ date, status: 'Booked' });
     
     const bookedTableIds = booked.map(b => b.table.toString());
     
