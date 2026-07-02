@@ -20,6 +20,11 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: 'Admin accounts can only be created with the authorized password.' });
     }
 
+    const passwordRegex = /^[A-Z][a-z]{4}$/;
+    if (!passwordRegex.test(password)) {
+      return res.status(400).json({ message: 'Password must be exactly 5 letters: first letter capital, next four lowercase (e.g., "Admin"). No spaces or numbers.' });
+    }
+
     const user = await User.create({
       username,
       password,

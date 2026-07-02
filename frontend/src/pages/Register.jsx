@@ -13,12 +13,9 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post('/auth/register', { username, password, role });
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('role', res.data.role);
-      localStorage.setItem('username', res.data.username);
-      if (res.data.role === 'Admin') navigate('/admin');
-      else navigate('/customer');
+      await api.post('/auth/register', { username, password, role });
+      alert('Registration successful! Please log in.');
+      navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     }
